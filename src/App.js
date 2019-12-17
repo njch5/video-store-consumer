@@ -89,8 +89,8 @@ class App extends Component {
 
     <section className="customer-list-wrapper">
       <CustomerCollection
-        movies={this.state.customerCollection}
-        selectMovieCallback={this.selectCustomer}
+        customers={this.state.customerCollection}
+        selectCustomerCallback={this.selectCustomer}
       />
     </section>
 

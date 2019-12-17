@@ -12,10 +12,10 @@ const getCustomers = (customers, selectCustomerCallBack) => {
   });
 }
 
-const CustomerCollection = ({ customers, selectPetCallback }) => {
+const CustomerCollection = ({ customers, selectCustomerCallback }) => {
   return (
     <div className="customer-group">
-      {getCustomers(customers, selectPetCallback)}
+      {getCustomers(customers, selectCustomerCallback)}
     </div>
   )
 }

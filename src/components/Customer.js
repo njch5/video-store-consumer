@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Customer = (props) => {
-  const { id, name, registered_at, address, city, state, postalCode, phone, accountCredit, selectCustomerCallback } = props;
+  const { id, name, registered_at, address, city, state, postal_code, phone, account_credit, selectCustomerCallback } = props;
   
   return(
     <div className="customer-item">
@@ -36,7 +36,7 @@ Customer.propTypes = {
   state: PropTypes.string,
   postal_code: PropTypes.number,
   phone: PropTypes.number,
-  account_credit = PropTypes.number,
+  account_credit: PropTypes.number,
   selectCustomerCallback: PropTypes.func,
 }
 
