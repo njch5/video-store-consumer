@@ -44,9 +44,23 @@ class App extends Component {
         this.setState({ error: error.message });
       });
 
-    axios.get(`http://localhost:3000/movies/${this.state.searchMovie}`)
+    // axios.get(`http://localhost:3000/movies/${this.state.searchMovie}`)
+    //   .then((response) => {
+    //     this.setState({ searchMovie: response.data });
+    //   })
+    //   .catch((error) => {
+    //     this.setState({ error: error.message });
+    //   });
+      
+    axios.get(`http://localhost:3000/movies`)
       .then((response) => {
-        this.setState({ searchMovie: response.data });
+        const movieSearches = response.data.map((m) => {
+          return {
+            title: m.movie.title,
+            overview: m.movie.overview,
+          }
+        })
+        this.setState({ searchMovie: movieSearches });
       })
       .catch((error) => {
         this.setState({ error: error.message });
