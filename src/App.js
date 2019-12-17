@@ -55,7 +55,10 @@ class App extends Component {
               <Link to="/search">About</Link>
             </li>
             <li>
-              <Link to="/library">Users</Link>
+              <Link to="/library">Library</Link>
+            </li>
+            <li>
+              <Link to="/customers">Customers</Link>
             </li>
           </ul>
         </nav>

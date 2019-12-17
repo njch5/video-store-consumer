@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Movie = (props) => {
-  const { id, title, overview, releaseDate, inventory, selectMovieCallback } = props;
+  const { id, title, overview, release_date, image_url, external_id, selectMovieCallback } = props;
 
   return(
-    <div className="movie">
+    <div className="movie-card">
       <p>{title}</p>
-      <p>{overview}</p>
-      <p>{releaseDate}</p>
-      <p>{inventory}</p>
+      <p>overview: {overview}</p>
+      <p>release date: {release_date}</p>
+      <p>external ID: {external_id}</p>
+
+      <img src={image_url} alt="film poster" />
 
       <section className="movie--header">
         <button
@@ -24,10 +26,12 @@ const Movie = (props) => {
 };
 
 Movie.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
-  releaseDate: PropTypes.instanceOf(Date),
-  inventory: PropTypes.number.isRequired,
+  release_date: PropTypes.string,
+  image_url: PropTypes.string,
+  external_id: PropTypes.number, 
   selectMovieCallback: PropTypes.func,
 }
 
