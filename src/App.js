@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import MovieCollection from './components/MovieCollection';
+import CustomerCollection from './components/CustomerCollection';
 // import React from "react";
 import {
   BrowserRouter as Router,
@@ -8,7 +9,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
 
     this.state = {
       movieCollection: [],
+      customerCollection: [],
       error: '',
     };
   }
@@ -32,13 +34,31 @@ class App extends Component {
   }
 
   selectMovie = (movieId) => {
-    const { movieCollection} = this.state;
+    const { movieCollection } = this.state;
 
     const currentMovie = movieCollection.find((movie) => {
       return movie.id === movieId;
     });
-
     this.setState({ currentMovie, });
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3000/customers')
+    .then((response) => {
+      this.setState({ customerCollection: response.data });
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
+
+  selectCustomer = (customerId) => {
+    const { customerCollection } = this.state;
+
+    const currentCustomer = customerCollection.find((customer) => {
+      return customer.id === customerId;
+    });
+    this.setState({ currentCustomer, });
   }
 
   render() {
@@ -66,7 +86,15 @@ class App extends Component {
         selectMovieCallback={this.selectMovie}
       />
     </section>
-     {/* A <Switch> looks through its children <Route>s and
+
+    <section className="customer-list-wrapper">
+      <CustomerCollection
+        customers={this.state.customerCollection}
+        selectCustomerCallback={this.selectCustomer}
+      />
+    </section>
+
+    {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/about">

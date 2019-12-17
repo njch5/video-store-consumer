@@ -13,7 +13,6 @@ const getMovies = (movies, selectMovieCallback) => {
 }
 
 const MovieCollection = ({ movies, selectMovieCallback}) => {
-
   return (
     <div className="card-group">
       {getMovies(movies, selectMovieCallback)}
