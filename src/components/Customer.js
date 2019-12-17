@@ -13,9 +13,9 @@ const Customer = (props) => {
         <p>{address}</p>
         <p>{city}</p>
         <p>{state}</p>
-        <p>{postalCode}</p>
+        <p>{postal_code}</p>
         <p>{phone}</p>
-        <p>{accountCredit}</p>
+        <p>{account_credit}</p>
 
         <button
           className="btn btn-primary customer"
@@ -34,9 +34,9 @@ Customer.propTypes = {
   address: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  postalCode: PropTypes.number,
+  postal_code: PropTypes.number,
   phone: PropTypes.number,
-  accountCredit = PropTypes.number,
+  account_credit = PropTypes.number,
   selectCustomerCallback: PropTypes.func,
 }
 

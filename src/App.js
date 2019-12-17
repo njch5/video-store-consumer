@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   selectMovie = (movieId) => {
-    const { movieCollection} = this.state;
+    const { movieCollection } = this.state;
 
     const currentMovie = movieCollection.find((movie) => {
       return movie.id === movieId;
@@ -52,8 +52,8 @@ class App extends Component {
     });
   }
 
-    selectCustomer = (customerId) => {
-    const { customerCollection} = this.state;
+  selectCustomer = (customerId) => {
+    const { customerCollection } = this.state;
 
     const currentCustomer = customerCollection.find((customer) => {
       return customer.id === customerId;
