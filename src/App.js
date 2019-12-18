@@ -27,6 +27,7 @@ class App extends Component {
       selectCustomer: '',
       searchMovie: undefined,
       movieResults: [],
+      rentals: [],
       error: '',
     };
   }
@@ -49,13 +50,33 @@ class App extends Component {
       });
   }
 
+  // componentDidUpdate() {
+  //   axios.get('http://localhost:3000/movies')
+  //     .then((response) => {
+  //       this.setState({ movieCollection: response.data });
+  //     })
+  //     .catch((error) => {
+  //       this.setState({ error: error.message });
+  //     });
+
+  //   axios.get('http://localhost:3000/customers')
+  //     .then((response) => {
+  //       this.setState({ customerCollection: response.data });
+  //     })
+  //     .catch((error) => {
+  //       this.setState({ error: error.message });
+  //     });
+  // }
+
+  // componentWillUnmount() {};
   selectMovie = (movieId) => {
     const { movieCollection } = this.state;
 
     const currentMovie = movieCollection.find((movie) => {
-      return movie.id === movieId;
+      return movie.external_id === movieId;
     });
     this.setState({ currentMovie, });
+    console.log(currentMovie);
   }
 
   selectCustomer = (customerId) => {
@@ -65,6 +86,7 @@ class App extends Component {
       return customer.id === customerId;
     });
     this.setState({ currentCustomer, });
+    console.log(currentCustomer);
   }
 
   filterMovies = (searchMovie) => {
@@ -89,24 +111,53 @@ class App extends Component {
     }
   }
 
-  addMovie = (movieToAdd) => {
-    axios.post('http://localhost:3000/search', movieToAdd)
+  // addMovie = (movieToAdd) => {
+  //   if (!this.state.selectMovie.external_id === movieToAdd.external_id) {
+  //   axios.post('http://localhost:3000/movies', movieToAdd)
 
-      .then((response) => {
-        console.log(movieToAdd);
-        console.log(response.data)
+  //     .then((response) => {
+  //       // console.log(movieToAdd);
+  //       // console.log(response.data)
+  //       this.setState({ error: ''})
+  //       const { movieCollection } = this.state;
+  //       movieCollection.push(response.data)
+  //       this.setState({
+  //         movieCollection,
+  //         error: undefined,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       this.setState({ error: error.message });
+  //     });
+  // }
+  // };
 
-        const { movieResults } = this.state;
-        movieResults.push(response.data)
-        this.setState({
-          movieResults,
-          error: undefined,
-        });
+  addRental = (movie, customerId) => {
+    let tenDaysLater = new Date(
+      new Date().getTime() + 10 * 24 * 60 * 60 * 1000
+    );
+
+    const queryParams = {
+      customer_id: customerId,
+      due_date: tenDaysLater
+    };
+
+    axios
+      .post(
+        "http://localhost:3000/rentals/" + `${movie.title}` + "/check-out",
+        queryParams
+      )
+      .then(response => {
+        this.setState({ success: "Rental successfully added!" });
+        this.componentDidMount();
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({ error: error.message });
       });
-  }
+
+    const newState = { selectedCustomer: "", selectedMovie: "" };
+    this.setState(newState);
+  };
 
   render() {
     return (

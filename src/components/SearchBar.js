@@ -1,9 +1,40 @@
-import React, { component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCollection from './MovieCollection';
+import axios from 'axios';
 
-const SearchBar = (props) => {
-  const { searchMovie, searchChangeCallback } = props;
+class SearchBar extends Component {
+  componentDidMount () {};
+  selectMovie = (movieId) => {
+    const movieCollection = this.props.movies;
+
+    const currentMovie = movieCollection.find((movie) => {
+      return movie.external_id === movieId;
+    });
+    console.log(currentMovie)
+    this.addMovie(currentMovie)
+  }
+
+  addMovie = (movieToAdd) => {
+    axios.post('http://localhost:3000/movies', movieToAdd)
+
+      .then((response) => {
+        // console.log(movieToAdd);
+        // console.log(response.data)
+        this.setState({ error: ''})
+        // const { movieResults } = this.state;
+        // movieResults.push(response.data)
+        // this.setState({
+        //   movieResults,
+        //   error: undefined,
+        // });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+  }
+  render(){
+  const { searchMovie, searchChangeCallback } = this.props;
   return (
     <section>
       <div>
@@ -17,13 +48,13 @@ const SearchBar = (props) => {
         className="search-bar"
         />
         
-        <MovieCollection movies={props.movies}/>
+        <MovieCollection movies={this.props.movies} selectMovieCallback={this.selectMovie}/>
     </section>
-  );
+  );}
 };
 
 SearchBar.propTypes = {
-  searchChangeCallback: PropTypes.func.isRequired,
+  searchChangeCallback: PropTypes.func,
   searchMovie: PropTypes.string.isRequired,
 };
 

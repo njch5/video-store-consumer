@@ -18,16 +18,9 @@ const Movie = (props) => {
       <section className="movie--header">
         <button
           className="btn btn-primary movie--select-movie-btn"
-          onClick={() => { selectMovieCallback(id) }}
+          onClick={() => { selectMovieCallback(external_id) }}
         >
           Select Movie
-        </button>
-
-        <button
-          className="btn btn-primary movie--add-movie-btn"
-          onClick={() => { addMovieCallback(external_id) }}
-        >
-          Add Movie to Library
         </button>
       </section>
     </div>
@@ -35,9 +28,9 @@ const Movie = (props) => {
 };
 
 Movie.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  overview: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  title: PropTypes.string,
+  overview: PropTypes.string,
   release_date: PropTypes.string,
   image_url: PropTypes.string,
   external_id: PropTypes.number, 
