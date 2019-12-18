@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const Customer = (props) => {
   const { id, name, registered_at, address, city, state, postal_code, phone, account_credit, selectCustomerCallback } = props;
   

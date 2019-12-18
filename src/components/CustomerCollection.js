@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Customer from './Customer';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const getCustomers = (customers, selectCustomerCallBack) => {
   return customers.map((customer) => {
     return <Customer

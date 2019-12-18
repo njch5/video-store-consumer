@@ -1,0 +1,4 @@
+.customer-group {
+  display: flex;
+  flex-direction: columns;
+}
