@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const Movie = (props) => {
   const { id, title, overview, release_date, image_url, external_id, selectMovieCallback } = props;
 
