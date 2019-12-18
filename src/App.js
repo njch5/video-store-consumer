@@ -25,7 +25,7 @@ class App extends Component {
       customerCollection: [],
       selectMovie: '',
       selectCustomer: '',
-      searchMovie: '',
+      searchMovie: undefined,
       movieResults: [],
       error: '',
     };
@@ -68,30 +68,25 @@ class App extends Component {
   }
 
   filterMovies = (searchMovie) => {
-    // searchMovie.preventDefault();
-
-    console.log(searchMovie)
     this.setState({
       searchMovie,
     });
 
     if (searchMovie !== ''){
         axios.get(`http://localhost:3000/movies?query=${searchMovie}`)
+      
       .then((response) => {
         if (searchMovie === this.state.searchMovie) {
           this.setState({ movieResults: response.data });
-        // } else if (searchMovie === '') {
-        //   this.setState({ movieResults: [] });
         }
       })
       .catch((error) => {
         this.setState({ error: error.message });
       });
-    }
 
-    // this.setState({
-    //   movie,
-    // });
+    } else {
+      this.setState({ movieResults: [] })
+    }
   }
 
   render() {
