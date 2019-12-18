@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Movie from './Movie';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../components/MovieCollection.css';
+
 const getMovies = (movies, selectMovieCallback) => {
   return movies.map((movie) => {
     return <Movie

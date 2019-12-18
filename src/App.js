@@ -23,10 +23,11 @@ class App extends Component {
       selectMovie: '',
       selectCustomer: '',
       searchMovie: '',
+      movieResults: [],
       error: '',
     };
   }
-
+  
   componentDidMount() {
     axios.get('http://localhost:3000/movies')
       .then((response) => {
@@ -52,28 +53,22 @@ class App extends Component {
     //     this.setState({ error: error.message });
     //   });
       
-    axios.get(`http://localhost:3000/movies`)
+    axios.get(`http://localhost:3000/movies?query=${this.state.searchMovie}`)
       .then((response) => {
-        const movieSearches = response.data.map((m) => {
-          return {
-            title: m.movie.title,
-            overview: m.movie.overview,
-          }
-        })
-        this.setState({ searchMovie: movieSearches });
+        this.setState({ movieResults: response.data });
       })
       .catch((error) => {
         this.setState({ error: error.message });
       });
   }
 
-  filteredList = () => {
-    return this.state.movieCollection.filter((movie) => {
-      const text = (`${ movie.title} ${ movie.overview}`).toUpperCase();
+  // filteredList = () => {
+  //   return this.state.movieCollection.filter((movie) => {
+  //     const text = (`${ movie.title} ${ movie.overview}`).toUpperCase();
 
-      return text.includes(this.state.searchMovie.toUpperCase());
-    });
-  }
+  //     return text.includes(this.state.searchMovie.toUpperCase());
+  //   });
+  // }
 
   selectMovie = (movieId) => {
     const { movieCollection } = this.state;
@@ -93,15 +88,15 @@ class App extends Component {
     this.setState({ currentCustomer, });
   }
 
-  filterMovies = (searchMovie) => {
-    console.log(searchMovie)
-    this.setState({
-      searchMovie,
-    });
-  }
+  // filterMovies = (searchMovie) => {
+  //   // console.log(searchMovie)
+  //   this.setState({
+  //     searchMovie,
+  //   });
+  // }
 
   render() {
-    console.log(this.state.searchMovie);
+    // console.log(this.state.searchMovie);
     return (
       
     <Router>
