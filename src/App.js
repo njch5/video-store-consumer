@@ -12,6 +12,8 @@ import {
 } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+// To add boostrap to it...
+// import './custom.scss';
 import './App.css';
 
 class App extends Component {
@@ -66,6 +68,8 @@ class App extends Component {
   }
 
   filterMovies = (searchMovie) => {
+    // searchMovie.preventDefault();
+
     console.log(searchMovie)
     this.setState({
       searchMovie,
@@ -76,12 +80,18 @@ class App extends Component {
       .then((response) => {
         if (searchMovie === this.state.searchMovie) {
           this.setState({ movieResults: response.data });
+        // } else if (searchMovie === '') {
+        //   this.setState({ movieResults: [] });
         }
       })
       .catch((error) => {
         this.setState({ error: error.message });
       });
     }
+
+    // this.setState({
+    //   movie,
+    // });
   }
 
   render() {
@@ -125,7 +135,6 @@ class App extends Component {
             selectCustomerCallback={this.selectCustomer}
           />
         </Route>
-        
         <Route
           path="/">
           {/* <About /> */}
