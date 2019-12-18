@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 import MovieCollection from './components/MovieCollection';
 import CustomerCollection from './components/CustomerCollection';
 import SearchBar from './components/SearchBar';
-// import React from "react";
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-// import logo from './logo.svg';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 class App extends Component {
@@ -44,31 +45,7 @@ class App extends Component {
       .catch((error) => {
         this.setState({ error: error.message });
       });
-
-    // axios.get(`http://localhost:3000/movies/${this.state.searchMovie}`)
-    //   .then((response) => {
-    //     this.setState({ searchMovie: response.data });
-    //   })
-    //   .catch((error) => {
-    //     this.setState({ error: error.message });
-    //   });
-      
-    axios.get(`http://localhost:3000/movies?query=${this.state.searchMovie}`)
-      .then((response) => {
-        this.setState({ movieResults: response.data });
-      })
-      .catch((error) => {
-        this.setState({ error: error.message });
-      });
   }
-
-  // filteredList = () => {
-  //   return this.state.movieCollection.filter((movie) => {
-  //     const text = (`${ movie.title} ${ movie.overview}`).toUpperCase();
-
-  //     return text.includes(this.state.searchMovie.toUpperCase());
-  //   });
-  // }
 
   selectMovie = (movieId) => {
     const { movieCollection } = this.state;
@@ -88,82 +65,75 @@ class App extends Component {
     this.setState({ currentCustomer, });
   }
 
-  // filterMovies = (searchMovie) => {
-  //   // console.log(searchMovie)
-  //   this.setState({
-  //     searchMovie,
-  //   });
-  // }
+  filterMovies = (searchMovie) => {
+    console.log(searchMovie)
+    this.setState({
+      searchMovie,
+    });
+
+    if (searchMovie !== ''){
+        axios.get(`http://localhost:3000/movies?query=${searchMovie}`)
+      .then((response) => {
+        if (searchMovie === this.state.searchMovie) {
+          this.setState({ movieResults: response.data });
+        }
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+    }
+  }
 
   render() {
-    // console.log(this.state.searchMovie);
     return (
-      
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/search">Search</Link>
-            </li>
-            <li>
-              <Link to="/library">Library</Link>
-            </li>
-            <li>
-              <Link to="/customers">Customers</Link>
-            </li>
-          </ul>
-        </nav>
-{/* 
-    <section className="movie-list-wrapper">
-      <MovieCollection
-        movies={this.state.movieCollection}
-        selectMovieCallback={this.selectMovie}
-      />
-    </section> */}
+    <main className="app">
+      <header className="app-header">
+        <h1>Cool Video Store</h1>
+      </header>
 
-    {/* <section className="customer-list-wrapper">
-      <CustomerCollection
-        customers={this.state.customerCollection}
-        selectCustomerCallback={this.selectCustomer}
-      />
-    </section> */}
-
-    {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+      <Router>
+        <div>
+          <section className="app-nav">
+          <nav>
+              <p><Link to="/">Home</Link></p>
+              <p><Link to="/search">Search</Link></p>
+              <p><Link to="/library">Library</Link></p>
+              <p><Link to="/customers">Customers</Link></p>
+          </nav>
+          </section>
         <Switch>
-          {/* <Route 
-            path="/">
-            {/* <About /> */}
-          {/* </Route> */}
-          <Route 
-            path="/search">
-            <SearchBar
-              searchChangeCallback={this.filterMovies}
-              searchMovie={this.state.searchMovie}
-              />
-          </Route>
-          <Route 
-            path="/library">
-            
-            <MovieCollection 
-              movies={this.state.movieCollection}
-              selectMovieCallback={this.selectMovie}
-              />
-          </Route>
-          <Route 
-            path="/customers">
-            <CustomerCollection
-              customers={this.state.customerCollection}
-              selectCustomerCallback={this.selectCustomer}
-              />
-          </Route>
+          
+        <Route
+          path="/search">
+          <SearchBar
+            movies={this.state.movieResults}
+            searchChangeCallback={this.filterMovies}
+            searchMovie={this.state.searchMovie}
+          />
+        </Route>
+        <Route 
+          path="/library">           
+          <MovieCollection 
+            movies={this.state.movieCollection}
+            selectMovieCallback={this.selectMovie}
+          />
+        </Route>
+        <Route 
+          path="/customers">
+          <CustomerCollection
+            customers={this.state.customerCollection}
+            selectCustomerCallback={this.selectCustomer}
+          />
+        </Route>
+        
+        <Route
+          path="/">
+          {/* <About /> */}
+        </Route>
         </Switch>
       </div>
     </Router>
+    </main>
   );
 }
 }

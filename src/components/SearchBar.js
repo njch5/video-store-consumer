@@ -1,5 +1,6 @@
 import React, { component } from 'react';
 import PropTypes from 'prop-types';
+import MovieCollection from './MovieCollection';
 
 const SearchBar = (props) => {
   const { searchMovie, searchChangeCallback } = props;
@@ -15,6 +16,8 @@ const SearchBar = (props) => {
         id="searchBar"
         className="search-bar"
         />
+        
+        <MovieCollection movies={props.movies}/>
     </section>
   );
 };
