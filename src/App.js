@@ -12,8 +12,6 @@ import {
 } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-// To add boostrap to it...
-// import './custom.scss';
 import './App.css';
 
 class App extends Component {
@@ -23,11 +21,16 @@ class App extends Component {
     this.state = {
       movieCollection: [],
       customerCollection: [],
-      selectMovie: '',
-      selectCustomer: '',
       searchMovie: undefined,
+      currentCustomer: undefined,
+      currentMovie: undefined,
       movieResults: [],
+<<<<<<< Updated upstream
       rentals: [],
+=======
+      selectMovie: [],
+      selectCustomer: [],
+>>>>>>> Stashed changes
       error: '',
     };
   }
@@ -111,6 +114,7 @@ class App extends Component {
     }
   }
 
+<<<<<<< Updated upstream
   // addMovie = (movieToAdd) => {
   //   if (!this.state.selectMovie.external_id === movieToAdd.external_id) {
   //   axios.post('http://localhost:3000/movies', movieToAdd)
@@ -150,6 +154,19 @@ class App extends Component {
       .then(response => {
         this.setState({ success: "Rental successfully added!" });
         this.componentDidMount();
+=======
+  addMovie = (movieToAdd) => {
+    axios.post('http://localhost:3000/movie', movieToAdd)
+
+      .then((response) => {
+        const { movieCollection } = this.state;
+        movieCollection.push(response.data)
+
+        this.setState({
+          movieCollection,
+          error: undefined,
+        });
+>>>>>>> Stashed changes
       })
       .catch(error => {
         this.setState({ error: error.message });
@@ -160,6 +177,9 @@ class App extends Component {
   };
 
   render() {
+    // const customerCard = this.state;
+    // console.log(currentCustomer)
+
     return (
     <main className="app">
       <header className="app-header">
@@ -188,7 +208,7 @@ class App extends Component {
         </Route>
         <Route 
           path="/library">           
-          <MovieCollection 
+          <MovieCollection
             movies={this.state.movieCollection}
             selectMovieCallback={this.selectMovie}
             addMovieCallback={this.addMovie}
@@ -203,7 +223,7 @@ class App extends Component {
         </Route>
         <Route
           path="/">
-          {/* <About /> */}
+          {/* {currentCustomer ? <CustomerCollection currentCustomer={currentCustomer} /> : ''} */}
         </Route>
         </Switch>
       </div>

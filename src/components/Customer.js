@@ -8,7 +8,6 @@ const Customer = (props) => {
   
   return(
     <div className="customer-item">
-
       <section className="customer--header">
         <p>{name}</p>
         <p>{registered_at}</p>
@@ -32,12 +31,12 @@ const Customer = (props) => {
 Customer.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  registered_at: PropTypes.number,
+  registered_at: PropTypes.string,
   address: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  postal_code: PropTypes.number,
-  phone: PropTypes.number,
+  postal_code: PropTypes.string,
+  phone: PropTypes.string,
   account_credit: PropTypes.number,
   selectCustomerCallback: PropTypes.func,
 }

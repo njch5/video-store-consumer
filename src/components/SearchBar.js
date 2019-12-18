@@ -54,8 +54,13 @@ class SearchBar extends Component {
 };
 
 SearchBar.propTypes = {
+<<<<<<< Updated upstream
   searchChangeCallback: PropTypes.func,
   searchMovie: PropTypes.string.isRequired,
+=======
+  searchChangeCallback: PropTypes.func.isRequired,
+  searchMovie: PropTypes.string,
+>>>>>>> Stashed changes
 };
 
 export default SearchBar;

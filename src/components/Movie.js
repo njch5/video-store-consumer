@@ -13,7 +13,7 @@ const Movie = (props) => {
       <p>release date: {release_date}</p>
       <p>external ID: {external_id}</p>
 
-      <img src={image_url} alt="film poster" />
+      <img src={image_url} alt="film poster"/>
 
       <section className="movie--header">
         <button
@@ -21,6 +21,21 @@ const Movie = (props) => {
           onClick={() => { selectMovieCallback(external_id) }}
         >
           Select Movie
+        </button>
+
+        <button
+          className="btn btn-primary movie--add-movie-btn"
+          onClick={() => { addMovieCallback ({
+            title: title,
+            overview: overview,
+            release_date: release_date,
+            image_url: image_url,
+            external_id: external_id 
+          });
+          }
+          }
+        >
+          Add Movie to Library
         </button>
       </section>
     </div>
