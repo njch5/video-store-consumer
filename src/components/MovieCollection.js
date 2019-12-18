@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Movie from './Movie';
-import axios from 'axios';
+// import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../components/MovieCollection.css';

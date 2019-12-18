@@ -15,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // To add boostrap to it...
 // import './custom.scss';
 import './App.css';
+import RentalDetails from './components/RentalDetails';
 
 class App extends Component {
   constructor(props) {
@@ -23,8 +24,8 @@ class App extends Component {
     this.state = {
       movieCollection: [],
       customerCollection: [],
-      selectMovie: '',
-      selectCustomer: '',
+      currentMovie: '',
+      currentCustomer: '',
       searchMovie: undefined,
       movieResults: [],
       rentals: [],
@@ -111,27 +112,6 @@ class App extends Component {
     }
   }
 
-  // addMovie = (movieToAdd) => {
-  //   if (!this.state.selectMovie.external_id === movieToAdd.external_id) {
-  //   axios.post('http://localhost:3000/movies', movieToAdd)
-
-  //     .then((response) => {
-  //       // console.log(movieToAdd);
-  //       // console.log(response.data)
-  //       this.setState({ error: ''})
-  //       const { movieCollection } = this.state;
-  //       movieCollection.push(response.data)
-  //       this.setState({
-  //         movieCollection,
-  //         error: undefined,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       this.setState({ error: error.message });
-  //     });
-  // }
-  // };
-
   addRental = (movie, customerId) => {
     let tenDaysLater = new Date(
       new Date().getTime() + 10 * 24 * 60 * 60 * 1000
@@ -144,7 +124,7 @@ class App extends Component {
 
     axios
       .post(
-        "http://localhost:3000/rentals/" + `${movie.title}` + "/check-out",
+        `http://localhost:3000/rentals/${movie.title}/check-out`,
         queryParams
       )
       .then(response => {
@@ -155,11 +135,12 @@ class App extends Component {
         this.setState({ error: error.message });
       });
 
-    const newState = { selectedCustomer: "", selectedMovie: "" };
+    const newState = { currentCustomer: "", currentMovie: "" };
     this.setState(newState);
   };
 
   render() {
+    console.log(this.state);
     return (
     <main className="app">
       <header className="app-header">
@@ -203,7 +184,10 @@ class App extends Component {
         </Route>
         <Route
           path="/">
-          {/* <About /> */}
+          <RentalDetails 
+        currentCustomer={this.state.currentCustomer}
+        currentMovie={this.state.currentMovie}
+        />
         </Route>
         </Switch>
       </div>

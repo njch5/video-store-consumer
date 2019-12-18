@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Movie = (props) => {
-  const { id, title, overview, release_date, image_url, external_id, selectMovieCallback, addMovieCallback } = props;
+  const { title, overview, release_date, image_url, external_id, selectMovieCallback, addMovieCallback } = props;
 
   return(
     <div className="movie-card">
       <p>{title}</p>
-      <p>overview: {overview}</p>
+      <p>{overview}</p>
       <p>release date: {release_date}</p>
       <p>external ID: {external_id}</p>
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCollection from './MovieCollection';
 import axios from 'axios';
+import Movie from './Movie';
 
 class SearchBar extends Component {
   componentDidMount () {};
@@ -16,6 +17,7 @@ class SearchBar extends Component {
   }
 
   addMovie = (movieToAdd) => {
+    if (!this.props.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
     axios.post('http://localhost:3000/movies', movieToAdd)
 
       .then((response) => {
@@ -32,6 +34,7 @@ class SearchBar extends Component {
       .catch((error) => {
         this.setState({ error: error.message });
       });
+    }
   }
   render(){
   const { searchMovie, searchChangeCallback } = this.props;
@@ -55,7 +58,7 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
   searchChangeCallback: PropTypes.func,
-  searchMovie: PropTypes.string.isRequired,
+  searchMovie: PropTypes.string,
 };
 
 export default SearchBar;
