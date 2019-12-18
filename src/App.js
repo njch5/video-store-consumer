@@ -89,6 +89,25 @@ class App extends Component {
     }
   }
 
+  addMovie = (movieToAdd) => {
+    axios.post('http://localhost:3000/search', movieToAdd)
+
+      .then((response) => {
+        console.log(movieToAdd);
+        console.log(response.data)
+
+        const { movieResults } = this.state;
+        movieResults.push(response.data)
+        this.setState({
+          movieResults,
+          error: undefined,
+        });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+  }
+
   render() {
     return (
     <main className="app">
@@ -121,6 +140,7 @@ class App extends Component {
           <MovieCollection 
             movies={this.state.movieCollection}
             selectMovieCallback={this.selectMovie}
+            addMovieCallback={this.addMovie}
           />
         </Route>
         <Route 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Movie = (props) => {
-  const { id, title, overview, release_date, image_url, external_id, selectMovieCallback } = props;
+  const { id, title, overview, release_date, image_url, external_id, selectMovieCallback, addMovieCallback } = props;
 
   return(
     <div className="movie-card">
@@ -22,6 +22,13 @@ const Movie = (props) => {
         >
           Select Movie
         </button>
+
+        <button
+          className="btn btn-primary movie--add-movie-btn"
+          onClick={() => { addMovieCallback(external_id) }}
+        >
+          Add Movie to Library
+        </button>
       </section>
     </div>
   );
@@ -35,6 +42,7 @@ Movie.propTypes = {
   image_url: PropTypes.string,
   external_id: PropTypes.number, 
   selectMovieCallback: PropTypes.func,
+  addMovieCallback: PropTypes.func,
 }
 
 export default Movie;
