@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import MovieCollection from './components/MovieCollection';
 import CustomerCollection from './components/CustomerCollection';
 import SearchBar from './components/SearchBar';
+import MovieList from './components/MovieList';
 
 import {
   BrowserRouter as Router,
@@ -12,8 +13,7 @@ import {
 } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-// To add boostrap to it...
-// import './custom.scss';
+
 import './App.css';
 import RentalDetails from './components/RentalDetails';
 
@@ -34,13 +34,13 @@ class App extends Component {
   }
   
   componentDidMount() {
-    axios.get('http://localhost:3000/movies')
-      .then((response) => {
-        this.setState({ movieCollection: response.data });
-      })
-      .catch((error) => {
-        this.setState({ error: error.message });
-      });
+    // axios.get('http://localhost:3000/movies')
+    //   .then((response) => {
+    //     this.setState({ movieCollection: response.data });
+    //   })
+    //   .catch((error) => {
+    //     this.setState({ error: error.message });
+    //   });
 
     axios.get('http://localhost:3000/customers')
       .then((response) => {
@@ -70,12 +70,13 @@ class App extends Component {
   // }
 
   // componentWillUnmount() {};
-  selectMovie = (movieId) => {
-    const { movieCollection } = this.state;
+  selectMovie = (movieList, movieId) => {
+    // const { movieCollection } = this.state;
 
-    const currentMovie = movieCollection.find((movie) => {
+    const currentMovie = movieList.find((movie) => {
       return movie.external_id === movieId;
     });
+    
     this.setState({ currentMovie, });
     console.log(currentMovie);
   }
@@ -112,13 +113,13 @@ class App extends Component {
     }
   }
 
-  addRental = (movie, customerId) => {
+  addRental = (movie, customer) => {
     let tenDaysLater = new Date(
       new Date().getTime() + 10 * 24 * 60 * 60 * 1000
     );
 
     const queryParams = {
-      customer_id: customerId,
+      customer_id: customer.id,
       due_date: tenDaysLater
     };
 
@@ -128,10 +129,13 @@ class App extends Component {
         queryParams
       )
       .then(response => {
+        console.log("Success!")
         this.setState({ success: "Rental successfully added!" });
         this.componentDidMount();
       })
       .catch(error => {
+        console.log("FAILED!")
+        console.log(error)
         this.setState({ error: error.message });
       });
 
@@ -140,12 +144,21 @@ class App extends Component {
   };
 
   render() {
+    // Returns the entire state
     console.log(this.state);
     return (
     <main className="app">
       <header className="app-header">
         <h1>Cool Video Store</h1>
       </header>
+
+      <section>
+      <RentalDetails 
+        currentCustomer={this.state.currentCustomer}
+        currentMovie={this.state.currentMovie}
+        addRentalCallback={this.addRental}
+        />
+      </section>
 
       <Router>
         <div>
@@ -169,10 +182,11 @@ class App extends Component {
         </Route>
         <Route 
           path="/library">           
-          <MovieCollection 
-            movies={this.state.movieCollection}
+          <MovieList 
+            // movies={this.state.movieCollection}
+
             selectMovieCallback={this.selectMovie}
-            addMovieCallback={this.addMovie}
+            // addMovieCallback={this.addMovie}
           />
         </Route>
         <Route 
@@ -184,10 +198,6 @@ class App extends Component {
         </Route>
         <Route
           path="/">
-          <RentalDetails 
-        currentCustomer={this.state.currentCustomer}
-        currentMovie={this.state.currentMovie}
-        />
         </Route>
         </Switch>
       </div>

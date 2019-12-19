@@ -17,25 +17,17 @@ class SearchBar extends Component {
   }
 
   addMovie = (movieToAdd) => {
-    if (!this.props.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
+    // if (!this.props.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
     axios.post('http://localhost:3000/movies', movieToAdd)
 
       .then((response) => {
-        // console.log(movieToAdd);
-        // console.log(response.data)
         this.setState({ error: ''})
-        // const { movieResults } = this.state;
-        // movieResults.push(response.data)
-        // this.setState({
-        //   movieResults,
-        //   error: undefined,
-        // });
       })
       .catch((error) => {
         this.setState({ error: error.message });
       });
     }
-  }
+  
   render(){
   const { searchMovie, searchChangeCallback } = this.props;
   return (
