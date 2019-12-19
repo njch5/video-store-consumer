@@ -7,7 +7,7 @@ const Customer = (props) => {
   const { id, name, registered_at, address, city, state, postal_code, phone, account_credit, selectCustomerCallback } = props;
   
   return(
-    <div className="customer-item">
+    <div className="customer-card">
 
       <section className="customer--header">
         <p>{name}</p>
@@ -22,7 +22,7 @@ const Customer = (props) => {
         <button
           className="btn btn-primary customer"
           onClick={() => {selectCustomerCallback(id)}}>
-            Customer
+            Select Customer
         </button>
       </section>
     </div>

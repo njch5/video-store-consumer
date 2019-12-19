@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCollection from './MovieCollection';
 import axios from 'axios';
-import Movie from './Movie';
+// import Movie from './Movie';
 
 class SearchBar extends Component {
   componentDidMount () {};
@@ -33,7 +33,7 @@ class SearchBar extends Component {
   return (
     <section>
       <div>
-        <label className="search-bar--label" htmlFor="searchBar">Search</label>
+        <label className="search-bar--label" htmlFor="searchBar">Search Movie</label>
       </div>
       <input
         onChange={(event) => { searchChangeCallback(event.target.value) }}

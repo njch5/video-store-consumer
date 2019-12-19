@@ -16,7 +16,7 @@ const getCustomers = (customers, selectCustomerCallBack) => {
 
 const CustomerCollection = ({ customers, selectCustomerCallback }) => {
   return (
-    <div className="customer-group">
+    <div className="card-group">
       {getCustomers(customers, selectCustomerCallback)}
     </div>
   )

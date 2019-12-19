@@ -5,7 +5,7 @@ import axios from 'axios';
 import MovieCollection from './MovieCollection';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import '../components/MovieList.css';
+import '../components/MovieList.css';
 
 class MovieList extends Component {
   constructor(props) {

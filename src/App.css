@@ -1,22 +1,28 @@
 .app {
   text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .app-nav {
   background-color: lightblue;
-  /* display: flex; */
-  flex-wrap: wrap;
-  /* flex-direction: row; */
+  display: flex;
+  font-weight: bold;
+  /* justify-content: center; */
+  justify-content: space-around;
+  border-style: ridge;
 }
 
 .app-header {
+  /* font-weight: bold; */
   grid-area: header;
   color: lightgoldenrodyellow;
   background-color: grey;
   padding: 15px;
 }
 
-/* .search-results {
-  margin-top: 20%;
-} */
+.rental-details {
+  background-color: lightgoldenrodyellow;
+  font-weight: bold;
+  border-style: double;
+  border-color: lightslategray;
+}

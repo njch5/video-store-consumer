@@ -152,7 +152,7 @@ class App extends Component {
         <h1>Cool Video Store</h1>
       </header>
 
-      <section>
+      <section className="rental-details">
       <RentalDetails 
         currentCustomer={this.state.currentCustomer}
         currentMovie={this.state.currentMovie}
@@ -162,8 +162,8 @@ class App extends Component {
 
       <Router>
         <div>
-          <section className="app-nav">
-          <nav>
+          <section>
+          <nav className="app-nav">
               <p><Link to="/">Home</Link></p>
               <p><Link to="/search">Search</Link></p>
               <p><Link to="/library">Library</Link></p>
