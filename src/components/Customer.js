@@ -36,8 +36,8 @@ Customer.propTypes = {
   address: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  postal_code: PropTypes.string,
-  phone: PropTypes.string,
+  postal_code: PropTypes.number,
+  phone: PropTypes.number,
   account_credit: PropTypes.number,
   selectCustomerCallback: PropTypes.func,
 }

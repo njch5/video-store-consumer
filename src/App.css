@@ -7,8 +7,16 @@
   background-color: lightblue;
   /* display: flex; */
   flex-wrap: wrap;
+  /* position: fixed; */
+
   /* flex-direction: row; */
 }
+
+/* .a-nav {
+  position: fixed;
+  width: 100%;
+  height: 1fr;
+} */
 
 .app-header {
   grid-area: header;

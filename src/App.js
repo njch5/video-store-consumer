@@ -5,6 +5,7 @@ import CustomerCollection from './components/CustomerCollection';
 import SearchBar from './components/SearchBar';
 import MovieList from './components/MovieList';
 import Alert from 'react-bootstrap/Alert';
+import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 
 import {
   BrowserRouter as Router,
@@ -163,12 +164,12 @@ class App extends Component {
       {this.state.alertText ? videoAlert() : "" }
         <div>
           <section className="app-nav">
-          <nav>
+          {/* <Navbar bg="light" variant="light" className="a-nav"> */}
               <p><Link to="/">Home</Link></p>
               <p><Link to="/search">Search</Link></p>
               <p><Link to="/library">Library</Link></p>
               <p><Link to="/customers">Customers</Link></p>
-          </nav>
+          {/* </Navbar> */}
           </section>
 
         <div className="main-routes">
