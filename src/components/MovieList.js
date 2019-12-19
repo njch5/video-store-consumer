@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import Movie from './Movie';
 import axios from 'axios';
 import MovieCollection from './MovieCollection';
 
@@ -48,7 +47,7 @@ class MovieList extends Component {
     // console.log(this.props.selectMovieCallback)
     // console.log("**********************")
     return (
-    <div className="card-group">
+    <div className="card-group-movie">
     {/* {this.getMovies(this.state.movies, this.selectMovieCallback, this.addMovieCallback)} */}
     <MovieCollection movies={this.state.movies} selectMovieCallback={this.movieSelected}/>
     </div>

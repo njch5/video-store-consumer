@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCollection from './MovieCollection';
 import axios from 'axios';
-// import Movie from './Movie';
+import videostore from '/Users/samcoll/ADA/week20/video-store-consumer/src/_DSC2759.jpg'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../components/SearchBar.css';
 
 class SearchBar extends Component {
   componentDidMount () {};
@@ -31,10 +34,13 @@ class SearchBar extends Component {
   render(){
   const { searchMovie, searchChangeCallback } = this.props;
   return (
-    <section>
+    <section>  
+      <div className= "search-movie-card">
+      
       <div>
-        <label className="search-bar--label" htmlFor="searchBar">Search Movie</label>
+        <h5><strong><label className="search-bar--label" htmlFor="searchBar">Search Movie</label></strong></h5>
       </div>
+      
       <input
         onChange={(event) => { searchChangeCallback(event.target.value) }}
         value={searchMovie}
@@ -42,8 +48,15 @@ class SearchBar extends Component {
         id="searchBar"
         className="search-bar"
         />
-        
+      </div>
+
+      <div className="cearch-movie-card">
         <MovieCollection movies={this.props.movies} selectMovieCallback={this.selectMovie}/>
+      </div>
+
+      <div>
+        <img src={videostore} className="video_store_image" alt="logo" />
+      </div>
     </section>
   );}
 };

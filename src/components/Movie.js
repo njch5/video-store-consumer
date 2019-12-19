@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../components/Movie.css';
 
 const Movie = (props) => {
-  const { title, image_url, external_id, selectMovieCallback } = props;
+  const { title, overview, release_date, image_url, external_id, selectMovieCallback } = props;
 
   return(
     <section className="movie-card">
-      <p>{title}</p>
-      {/* <p>{overview}</p> */}
-      {/* <p>release date: {release_date}</p> */}
-      {/* <p>external ID: {external_id}</p> */}
+      <h5><strong>{title}</strong></h5>
+      <p>{overview}</p>
+      <p>release date: {release_date}</p>
+      <p>external ID: {external_id}</p>
 
       <img src={image_url} alt="film poster" />
       
@@ -23,7 +24,6 @@ const Movie = (props) => {
           Select Movie
         </button>
         </section>
-     
     </section>
   );
 };

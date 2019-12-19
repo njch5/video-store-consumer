@@ -12,11 +12,10 @@
 }
 
 .app-header {
-  /* font-weight: bold; */
   grid-area: header;
   color: lightgoldenrodyellow;
   background-color: grey;
-  padding: 15px;
+  padding: 8px;
 }
 
 .rental-details {
@@ -40,6 +39,10 @@
   text-align: center
 }
 
-/* .search-results {
-  margin-top: 20%;
-} */
+.app-footer {
+  grid-area: header;
+  color: lightgoldenrodyellow;
+  background-color: grey;
+  padding: 10px;
+  border: double
+}
