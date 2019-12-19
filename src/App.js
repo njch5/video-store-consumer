@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import CustomerCollection from './components/CustomerCollection';
 import SearchBar from './components/SearchBar';
 import MovieList from './components/MovieList';
-import FlashMessage from "react-flash-message";
+import Alert from 'react-bootstrap/Alert';
 
 import {
   BrowserRouter as Router,
@@ -30,8 +30,8 @@ class App extends Component {
       searchMovie: undefined,
       movieResults: [],
       rentals: [],
-      success: '',
-      error: '',
+      alertText: '',
+      alertVariant: '',
     };
   }
   
@@ -110,13 +110,20 @@ class App extends Component {
       )
       .then(response => {
         console.log("Success!")
-        this.setState({ success: "Rental successfully added!" });
-        this.componentDidMount();
+        this.setState({ 
+          alertText: "Rental successfully created!",
+          alertVariant: "success" 
+        });
+        // this.componentDidMount();
       })
       .catch(error => {
         console.log("FAILED!")
         // console.log(error)
-        this.setState({ error: error.message });
+        this.setState({ 
+          error: error.message,
+          alertText: `An error occurred: ${error.message}`,
+          alertVariant: "danger" 
+        });
       });
 
     const newState = { currentCustomer: "", currentMovie: "" };
@@ -124,9 +131,21 @@ class App extends Component {
   };
 
   render() {
+    const videoAlert = () => {
+      return(
+        <Alert 
+          variant={this.state.alertVariant}
+          onClose={() => this.setState({alertText: undefined, alertVariant: undefined})} 
+          dismissible
+        > 
+          {this.state.alertText} 
+        </Alert>
+      )
+    }
     // Returns the entire state
     // console.log(this.state);
     return (
+      
     <main className="app">
       <header className="app-header">
         <h1>Cool Video Store</h1>
@@ -141,6 +160,7 @@ class App extends Component {
       </section>
 
       <Router>
+      {this.state.alertText ? videoAlert() : "" }
         <div>
           <section className="app-nav">
           <nav>
@@ -151,17 +171,8 @@ class App extends Component {
           </nav>
           </section>
 
-          <div className="error">
-            <FlashMessage duration={8000} message={this.state.error}>
-              <strong>{this.state.error}</strong>
-            </FlashMessage>
-          </div>
-          <div className="success">
-            <FlashMessage duration={8000}>
-              <strong>{this.state.success}</strong>
-            </FlashMessage>
-          </div>
-
+        <div className="main-routes">
+        
         <Switch>
           
         <Route
@@ -192,6 +203,7 @@ class App extends Component {
           path="/">
         </Route>
         </Switch>
+        </div>
       </div>
     </Router>
     </main>

@@ -9,9 +9,9 @@ const Movie = (props) => {
   return(
     <div className="movie-card">
       <p>{title}</p>
-      <p>{overview}</p>
-      <p>release date: {release_date}</p>
-      <p>external ID: {external_id}</p>
+      {/* <p>{overview}</p> */}
+      {/* <p>release date: {release_date}</p> */}
+      {/* <p>external ID: {external_id}</p> */}
 
       <img src={image_url} alt="film poster" />
 
