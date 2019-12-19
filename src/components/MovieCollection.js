@@ -8,7 +8,7 @@ import '../components/MovieCollection.css';
 
 
 const getMovies = (movies, selectMovieCallback, addMovieCallback) => {
-  console.log(movies)
+  // console.log(movies)
   return movies.map((movie) => {
     return <Movie
       key={movie.id}
@@ -21,7 +21,7 @@ const getMovies = (movies, selectMovieCallback, addMovieCallback) => {
 
 const MovieCollection = ({ movies, selectMovieCallback, addMovieCallback}) => {
   // console.log(addMovieCallback);
-  console.log(movies)
+  // console.log(movies)
   return (
     <div className="card-group">
       {getMovies(movies, selectMovieCallback, addMovieCallback)}

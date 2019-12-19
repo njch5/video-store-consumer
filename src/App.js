@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import MovieCollection from './components/MovieCollection';
+// import MovieCollection from './components/MovieCollection';
 import CustomerCollection from './components/CustomerCollection';
 import SearchBar from './components/SearchBar';
 import MovieList from './components/MovieList';
+import FlashMessage from "react-flash-message";
 
 import {
   BrowserRouter as Router,
@@ -29,6 +30,7 @@ class App extends Component {
       searchMovie: undefined,
       movieResults: [],
       rentals: [],
+      success: '',
       error: '',
     };
   }
@@ -51,34 +53,13 @@ class App extends Component {
       });
   }
 
-  // componentDidUpdate() {
-  //   axios.get('http://localhost:3000/movies')
-  //     .then((response) => {
-  //       this.setState({ movieCollection: response.data });
-  //     })
-  //     .catch((error) => {
-  //       this.setState({ error: error.message });
-  //     });
-
-  //   axios.get('http://localhost:3000/customers')
-  //     .then((response) => {
-  //       this.setState({ customerCollection: response.data });
-  //     })
-  //     .catch((error) => {
-  //       this.setState({ error: error.message });
-  //     });
-  // }
-
-  // componentWillUnmount() {};
   selectMovie = (movieList, movieId) => {
-    // const { movieCollection } = this.state;
 
     const currentMovie = movieList.find((movie) => {
       return movie.external_id === movieId;
     });
     
     this.setState({ currentMovie, });
-    console.log(currentMovie);
   }
 
   selectCustomer = (customerId) => {
@@ -88,7 +69,6 @@ class App extends Component {
       return customer.id === customerId;
     });
     this.setState({ currentCustomer, });
-    console.log(currentCustomer);
   }
 
   filterMovies = (searchMovie) => {
@@ -135,7 +115,7 @@ class App extends Component {
       })
       .catch(error => {
         console.log("FAILED!")
-        console.log(error)
+        // console.log(error)
         this.setState({ error: error.message });
       });
 
@@ -145,7 +125,7 @@ class App extends Component {
 
   render() {
     // Returns the entire state
-    console.log(this.state);
+    // console.log(this.state);
     return (
     <main className="app">
       <header className="app-header">
@@ -170,6 +150,18 @@ class App extends Component {
               <p><Link to="/customers">Customers</Link></p>
           </nav>
           </section>
+
+          <div className="error">
+            <FlashMessage duration={8000} message={this.state.error}>
+              <strong>{this.state.error}</strong>
+            </FlashMessage>
+          </div>
+          <div className="success">
+            <FlashMessage duration={8000}>
+              <strong>{this.state.success}</strong>
+            </FlashMessage>
+          </div>
+
         <Switch>
           
         <Route

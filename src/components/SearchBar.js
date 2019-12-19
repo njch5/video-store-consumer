@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCollection from './MovieCollection';
 import axios from 'axios';
-import Movie from './Movie';
+// import Movie from './Movie';
 
 class SearchBar extends Component {
   componentDidMount () {};
@@ -12,7 +12,7 @@ class SearchBar extends Component {
     const currentMovie = movieCollection.find((movie) => {
       return movie.external_id === movieId;
     });
-    console.log(currentMovie)
+    // console.log(currentMovie)
     this.addMovie(currentMovie)
   }
 
