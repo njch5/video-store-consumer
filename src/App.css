@@ -25,3 +25,21 @@
   border-style: double;
   border-color: lightslategray;
 }
+
+.success{
+  color: white;
+  background-color: green;
+  font-size: 1.5rem;
+  text-align: center
+}
+
+.error{
+  color: white;
+  background-color: red;
+  font-size: 1.5rem;
+  text-align: center
+}
+
+/* .search-results {
+  margin-top: 20%;
+} */

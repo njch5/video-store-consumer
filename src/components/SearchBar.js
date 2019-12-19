@@ -12,7 +12,7 @@ class SearchBar extends Component {
     const currentMovie = movieCollection.find((movie) => {
       return movie.external_id === movieId;
     });
-    console.log(currentMovie)
+    // console.log(currentMovie)
     this.addMovie(currentMovie)
   }
 

@@ -6,6 +6,9 @@ import SearchBar from './components/SearchBar';
 import MovieList from './components/MovieList';
 import RentalDetails from './components/RentalDetails';
 import Homepage from './components/Homepage';
+import Alert from 'react-bootstrap/Alert';
+
+// import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 
 import {
   BrowserRouter as Router,
@@ -16,7 +19,6 @@ import {
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +32,8 @@ class App extends Component {
       searchMovie: undefined,
       movieResults: [],
       rentals: [],
-      error: '',
+      alertText: '',
+      alertVariant: '',
     };
   }
   
@@ -52,34 +55,13 @@ class App extends Component {
       });
   }
 
-  // componentDidUpdate() {
-  //   axios.get('http://localhost:3000/movies')
-  //     .then((response) => {
-  //       this.setState({ movieCollection: response.data });
-  //     })
-  //     .catch((error) => {
-  //       this.setState({ error: error.message });
-  //     });
-
-  //   axios.get('http://localhost:3000/customers')
-  //     .then((response) => {
-  //       this.setState({ customerCollection: response.data });
-  //     })
-  //     .catch((error) => {
-  //       this.setState({ error: error.message });
-  //     });
-  // }
-
-  // componentWillUnmount() {};
   selectMovie = (movieList, movieId) => {
-    // const { movieCollection } = this.state;
 
     const currentMovie = movieList.find((movie) => {
       return movie.external_id === movieId;
     });
     
     this.setState({ currentMovie, });
-    console.log(currentMovie);
   }
 
   selectCustomer = (customerId) => {
@@ -89,7 +71,6 @@ class App extends Component {
       return customer.id === customerId;
     });
     this.setState({ currentCustomer, });
-    console.log(currentCustomer);
   }
 
   filterMovies = (searchMovie) => {
@@ -131,13 +112,20 @@ class App extends Component {
       )
       .then(response => {
         console.log("Success!")
-        this.setState({ success: "Rental successfully added!" });
-        this.componentDidMount();
+        this.setState({ 
+          alertText: "Rental successfully created!",
+          alertVariant: "success" 
+        });
+        // this.componentDidMount();
       })
       .catch(error => {
         console.log("FAILED!")
-        console.log(error)
-        this.setState({ error: error.message });
+        // console.log(error)
+        this.setState({ 
+          error: error.message,
+          alertText: `An error occurred: ${error.message}`,
+          alertVariant: "danger" 
+        });
       });
 
     const newState = { currentCustomer: "", currentMovie: "" };
@@ -145,9 +133,21 @@ class App extends Component {
   };
 
   render() {
+    const videoAlert = () => {
+      return(
+        <Alert 
+          variant={this.state.alertVariant}
+          onClose={() => this.setState({alertText: undefined, alertVariant: undefined})} 
+          dismissible
+        > 
+          {this.state.alertText} 
+        </Alert>
+      )
+    }
     // Returns the entire state
-    console.log(this.state);
+    // console.log(this.state);
     return (
+      
     <main className="app">
       <header className="app-header">
         <h1>Cool Video Store</h1>
@@ -162,6 +162,7 @@ class App extends Component {
       </section>
 
       <Router>
+      {this.state.alertText ? videoAlert() : "" }
         <div>
           <section>
           <nav className="app-nav">
@@ -171,6 +172,9 @@ class App extends Component {
               <h5><strong><Link to="/search">Search</Link></strong></h5>
           </nav>
           </section>
+
+        <div className="main-routes">
+        
         <Switch>
           
         <Route
@@ -202,6 +206,7 @@ class App extends Component {
             <Homepage/>
         </Route>
         </Switch>
+        </div>
       </div>
     </Router>
     </main>

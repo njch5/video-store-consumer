@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Movie from './Movie';
+// import Movie from './Movie';
 import axios from 'axios';
 import MovieCollection from './MovieCollection';
 
@@ -35,7 +35,7 @@ class MovieList extends Component {
     axios.get('http://localhost:3000/movies')
       .then((response) => {
         console.log("SUCCESS")
-        console.log(response.data)
+        // console.log(response.data)
         this.setState({ movies: response.data });
       })
       .catch((error) => {
@@ -45,8 +45,8 @@ class MovieList extends Component {
   }
 
   render () {
-    console.log(this.props.selectMovieCallback)
-    console.log("**********************")
+    // console.log(this.props.selectMovieCallback)
+    // console.log("**********************")
     return (
     <div className="card-group">
     {/* {this.getMovies(this.state.movies, this.selectMovieCallback, this.addMovieCallback)} */}
@@ -57,7 +57,7 @@ class MovieList extends Component {
 }
 
 MovieList.propTypes = {
-  movies: PropTypes.array.isRequired,
+  movies: PropTypes.array,
   selectMovieCallback: PropTypes.func,
   addMovieCallback: PropTypes.func,
 };

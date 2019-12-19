@@ -9,6 +9,22 @@ const RentalDetails = (props) => {
   // console.log(props.currentCustomer)
   const { addRentalCallback } = props;
 
+  return (
+    // this.state.alertText ? videoAlert() : ""
+    <section className="rental-details">
+      <p className="rentaldetails--customer">{ name ? `Selected Customer: ${name}` : ''}</p>
+      <p className="rentaldetails--movie">{ title ? `Selected Movie: ${title}` : ''}</p>
+
+    {name && title ? <button
+      className="btn btn-primary rental"
+      onClick={() => {addRentalCallback(props.currentMovie, props.currentCustomer)}}>
+        Rent this Movie
+    </button> : ''}
+    
+    </section>
+  )
+}
+
   // if (props.currentCustomer !== ''){
   //   return (
   //     <section className="rental-details">
@@ -27,7 +43,6 @@ const RentalDetails = (props) => {
   //     ''
   //   )
   // }
-}
 
 RentalDetails.propTypes = {
   currentCustomer: PropTypes.shape({
