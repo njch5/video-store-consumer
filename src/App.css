@@ -7,7 +7,6 @@
   background-color: lightblue;
   display: flex;
   font-weight: bold;
-  /* justify-content: center; */
   justify-content: space-around;
   border-style: ridge;
 }

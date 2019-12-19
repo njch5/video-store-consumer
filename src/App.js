@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import MovieCollection from './components/MovieCollection';
+// import MovieCollection from './components/MovieCollection';
 import CustomerCollection from './components/CustomerCollection';
 import SearchBar from './components/SearchBar';
 import MovieList from './components/MovieList';
+import RentalDetails from './components/RentalDetails';
+import Homepage from './components/Homepage';
 
 import {
   BrowserRouter as Router,
@@ -12,10 +14,9 @@ import {
   Link
 } from "react-router-dom";
 
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './App.css';
-import RentalDetails from './components/RentalDetails';
 
 class App extends Component {
   constructor(props) {
@@ -164,10 +165,10 @@ class App extends Component {
         <div>
           <section>
           <nav className="app-nav">
-              <p><Link to="/">Home</Link></p>
-              <p><Link to="/search">Search</Link></p>
-              <p><Link to="/library">Library</Link></p>
-              <p><Link to="/customers">Customers</Link></p>
+              <h5><strong><Link to="/">Home</Link></strong></h5>
+              <h5><strong><Link to="/customers">Customers</Link></strong></h5>
+              <h5><strong><Link to="/library">Library</Link></strong></h5>
+              <h5><strong><Link to="/search">Search</Link></strong></h5>
           </nav>
           </section>
         <Switch>
@@ -198,6 +199,7 @@ class App extends Component {
         </Route>
         <Route
           path="/">
+            <Homepage/>
         </Route>
         </Switch>
       </div>

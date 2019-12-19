@@ -8,18 +8,25 @@ const RentalDetails = (props) => {
   // console.log(name)
   // console.log(props.currentCustomer)
   const { addRentalCallback } = props;
-  return (
-    <section className="rental-details">
-      <p className="rentaldetails--customer">Customer: {name}</p>
-      <p className="rentaldetails--movie">Movie: {title}</p>
 
-    <button
-      className="btn btn-primary rental"
-      onClick={() => {addRentalCallback(props.currentMovie, props.currentCustomer)}}>
-        Rent this Movie
-    </button>
-    </section>
-  )
+  if (props.currentCustomer !== ''){
+    return (
+      <section className="rental-details">
+        <p className="rentaldetails--customer">CURRENT CUSTOMER: {name}</p>
+        <p className="rentaldetails--movie">SELECTED MOVIE: {title}</p>
+
+      <button
+        className="btn btn-primary rental"
+        onClick={() => {addRentalCallback(props.currentMovie, props.currentCustomer)}}>
+          Rent this Movie
+      </button>
+      </section>
+    )
+  } else {
+    return (
+      ''
+    )
+  }
 }
 
 RentalDetails.propTypes = {

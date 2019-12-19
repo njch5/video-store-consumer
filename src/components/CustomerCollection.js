@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Customer from './Customer';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../components/CustomerCollection.css';
 
 const getCustomers = (customers, selectCustomerCallBack) => {
   return customers.map((customer) => {
