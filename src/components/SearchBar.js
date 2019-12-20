@@ -2,13 +2,35 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MovieCollection from './MovieCollection';
 import axios from 'axios';
-import videostore from '/Users/samcoll/ADA/week20/video-store-consumer/src/_DSC2759.jpg'
+import videostore from '/Users/nickychoi/Documents/ada-weekly-workspaces/week-twenty/video-store-consumer/src/_DSC2759.jpg'
+import Alert from 'react-bootstrap/Alert';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../components/SearchBar.css';
 
 class SearchBar extends Component {
-  componentDidMount () {};
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      movies: [],
+      alertText: '',
+      alertVariant: '',
+    };
+  }
+  componentDidMount () {
+    axios.get('http://localhost:3000/movies')
+      .then((response) => {
+        console.log("SUCCESS")
+        // console.log(response.data)
+        this.setState({ movies: response.data });
+      })
+      .catch((error) => {
+        console.log("FAILED")
+        this.setState({ error: error.message });
+      });
+  };
   selectMovie = (movieId) => {
     const movieCollection = this.props.movies;
 
@@ -20,21 +42,42 @@ class SearchBar extends Component {
   }
 
   addMovie = (movieToAdd) => {
-    // if (!this.props.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
-    axios.post('http://localhost:3000/movies', movieToAdd)
+    if (!this.state.movies.find(movie => movie.external_id === movieToAdd.external_id)) {
 
-      .then((response) => {
-        this.setState({ error: ''})
+    axios.post('http://localhost:3000/movies', movieToAdd)
+      // console.log(this.state.movies)
+      .then((error) => {
+        this.setState({ 
+          alertText: "Failed to add movie",
+          alertVariant: "danger"  
+        })
       })
-      .catch((error) => {
-        this.setState({ error: error.message });
+      .catch((response) => {
+        this.setState({
+          alertText: "Added movie to library!",
+          alertVariant: "success"
+        });
       });
-    }
+  } else {
+    this.setState({
+      alertText: "This movie had already been added to the library",
+      alertVariant: "danger"
+    });
+  }
+}
   
   render(){
   const { searchMovie, searchChangeCallback } = this.props;
   return (
-    <section>  
+
+    <section> 
+      <Alert 
+      variant={this.state.alertVariant}
+      onClose={() => this.setState({alertText: undefined, alertVariant: undefined})} 
+      dismissible
+    > 
+      {this.state.alertText} 
+      </Alert> 
       <div className= "search-movie-card">
       
       <div>

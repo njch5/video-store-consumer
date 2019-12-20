@@ -209,10 +209,6 @@ class App extends Component {
         </div>
       </div>
     </Router>
-    
-    <header className="app-footer">
-      <h4>Copyright ©2019 Samantha & Nicky</h4>
-    </header>
     </main>
   );
 }
