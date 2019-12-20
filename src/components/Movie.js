@@ -11,8 +11,8 @@ const Movie = (props) => {
     <section className="movie-card">
       <h5><strong>{title}</strong></h5>
       <p>{overview}</p>
-      <p>release date: {release_date}</p>
-      <p>external ID: {external_id}</p>
+      <p>Release date: {release_date}</p>
+      {/* <p>external ID: {external_id}</p> */}
 
       <img src={image_url} alt="film poster" />
       

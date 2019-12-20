@@ -14,16 +14,6 @@ class MovieList extends Component {
       movies: [],
     };
   }
-  // getMovies = (movies, selectMovieCallback, addMovieCallback) => {
-  //     return movies.map((movie) => {
-  //       return <Movie
-  //         key={movie.id}
-  //         {...movie}
-  //         selectMovieCallback={selectMovieCallback}
-  //         addMovieCallback={addMovieCallback}
-  //       />
-  //     });
-  //   }
 
   movieSelected = (movieId) => {
     this.props.selectMovieCallback(this.state.movies, movieId);

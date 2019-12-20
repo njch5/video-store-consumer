@@ -1,14 +1,11 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-// import MovieCollection from './components/MovieCollection';
 import CustomerCollection from './components/CustomerCollection';
 import SearchBar from './components/SearchBar';
 import MovieList from './components/MovieList';
 import RentalDetails from './components/RentalDetails';
 import Homepage from './components/Homepage';
 import Alert from 'react-bootstrap/Alert';
-
-// import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 
 import {
   BrowserRouter as Router,
@@ -38,14 +35,6 @@ class App extends Component {
   }
   
   componentDidMount() {
-    // axios.get('http://localhost:3000/movies')
-    //   .then((response) => {
-    //     this.setState({ movieCollection: response.data });
-    //   })
-    //   .catch((error) => {
-    //     this.setState({ error: error.message });
-    //   });
-
     axios.get('http://localhost:3000/customers')
       .then((response) => {
         this.setState({ customerCollection: response.data });
@@ -116,11 +105,9 @@ class App extends Component {
           alertText: "Rental successfully created!",
           alertVariant: "success" 
         });
-        // this.componentDidMount();
       })
       .catch(error => {
         console.log("FAILED!")
-        // console.log(error)
         this.setState({ 
           error: error.message,
           alertText: `An error occurred: ${error.message}`,
@@ -188,10 +175,8 @@ class App extends Component {
         <Route 
           path="/library">           
           <MovieList 
-            // movies={this.state.movieCollection}
 
             selectMovieCallback={this.selectMovie}
-            // addMovieCallback={this.addMovie}
           />
         </Route>
         <Route 

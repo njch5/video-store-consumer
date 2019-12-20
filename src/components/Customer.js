@@ -18,7 +18,7 @@ const Customer = (props) => {
         <p>{state}</p>
         <p>{postal_code}</p>
         <p>{phone}</p>
-        <p>{account_credit}</p>
+        {/* <p>{account_credit}</p> */}
 
         <button
           className="btn btn-primary customer"
