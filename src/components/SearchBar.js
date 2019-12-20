@@ -60,7 +60,7 @@ class SearchBar extends Component {
       });
   } else {
     this.setState({
-      alertText: "This movie had already been added to the library",
+      alertText: "This movie has already been added to the library",
       alertVariant: "danger"
     });
   }
